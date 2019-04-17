@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="计算机网络,">
+  <meta name="keywords" content="Mybatis,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="笔记心得记录">
-<meta name="keywords" content="计算机网络">
+<meta name="description" content="使用resultMap解决数据库字段和实体类字段不一致的情况​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习">
+<meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指Java面试-计算机网络面试核心">
-<meta property="og:url" content="http://yoursite.com/2019/04/15/剑指Java面试-计算机网络面试核心/index.html">
+<meta property="og:title" content="Mybatis零散记录">
+<meta property="og:url" content="http://yoursite.com/2019/04/17/Mybatis零散记录/index.html">
 <meta property="og:site_name" content="Chor Ho&#39;s blog">
-<meta property="og:description" content="笔记心得记录">
+<meta property="og:description" content="使用resultMap解决数据库字段和实体类字段不一致的情况​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-16T14:40:39.640Z">
+<meta property="og:updated_time" content="2019-04-17T07:26:49.813Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指Java面试-计算机网络面试核心">
-<meta name="twitter:description" content="笔记心得记录">
+<meta name="twitter:title" content="Mybatis零散记录">
+<meta name="twitter:description" content="使用resultMap解决数据库字段和实体类字段不一致的情况​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/15/剑指Java面试-计算机网络面试核心/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/17/Mybatis零散记录/">
 
 
 
 
 
-  <title>剑指Java面试-计算机网络面试核心 | Chor Ho's blog</title>
+  <title>Mybatis零散记录 | Chor Ho's blog</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/剑指Java面试-计算机网络面试核心/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/Mybatis零散记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chan Chor Ho">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指Java面试-计算机网络面试核心</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis零散记录</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-15T15:49:02+08:00">
-                2019-04-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T13:58:15+08:00">
+                2019-04-17
               </time>
             
 
@@ -330,7 +330,19 @@
       
 
       
-        
+        <h2 id="使用resultMap解决数据库字段和实体类字段不一致的情况"><a href="#使用resultMap解决数据库字段和实体类字段不一致的情况" class="headerlink" title="使用resultMap解决数据库字段和实体类字段不一致的情况"></a>使用resultMap解决数据库字段和实体类字段不一致的情况</h2><p>​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习惯于驼峰命名法，在数据库中我们更常用下划线命名法。例如在实体类中User对象中的userName，数据库中的user_name,如果直接使用Select查询中，Mybatis就没法帮我们将我们想要的结果查询出来了。这时候可以使用resultMap来解决。<br>​    resultMap可以用来描述从数据库结果集中来加载对象，有的时候映射过于复杂，我们可以在Mapper中定义resultMap来解决映射问题。当然resultMap还有其他用法<br>​    在上面的问题中，可以在userMapper中这样定义一个resultMap：<br>​    </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userMap"</span> <span class="attr">type</span>=<span class="string">"org.sang.bean.User"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">javaType</span>=<span class="string">"long"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"user_name"</span> <span class="attr">javaType</span>=<span class="string">"string"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>关于这个resultMap：</p>
+<ol>
+<li><p>首先我们给resultMap去了一个id，这个id是resultMap的唯一标识符，我们在后面引用这个resultMap的时候就是通过这个id来引用，然后还定义了type属性，type属性指明了这个resultMap它对应的是哪个JavaBean。 </p>
+</li>
+<li><p>在resultMap节点中，id表示哪个字段代表这主键，result节点定义了普通的映射关系，这里的property表示JavaBean中的属性名称，column表示数据库中的字段名称，javaType代表JavaBean中该属性的类型，jdbcType则表示数据库中该字段的类型</p>
+</li>
+</ol>
+<p>如此定义后，我们只需要在select查询的时候指定resultMap即可：</p>
+<p>​    </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getUser"</span> <span class="attr">resultMap</span>=<span class="string">"userMap"</span> <span class="attr">parameterType</span>=<span class="string">"Long"</span>&gt;</span></span><br><span class="line">        select * from user2 where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -347,7 +359,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算机网络/" <i class="fa fa-tag"> 计算机网络</a>
+            <a href="/tags/Mybatis/" <i class="fa fa-tag"> Mybatis</a>
           
         </div>
       
@@ -360,8 +372,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/14/a/" rel="next" title="a">
-                <i class="fa fa-chevron-left"></i> a
+              <a href="/2019/04/15/剑指Java面试-Java底层知识：JVM/" rel="next" title="剑指Java面试-Java底层知识：JVM">
+                <i class="fa fa-chevron-left"></i> 剑指Java面试-Java底层知识：JVM
               </a>
             
           </div>
@@ -369,10 +381,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/15/剑指Java面试-Java底层知识：JVM/" rel="prev" title="剑指Java面试-Java底层知识：JVM">
-                剑指Java面试-Java底层知识：JVM <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -424,8 +432,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -488,6 +505,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用resultMap解决数据库字段和实体类字段不一致的情况"><span class="nav-number">1.</span> <span class="nav-text">使用resultMap解决数据库字段和实体类字段不一致的情况</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
