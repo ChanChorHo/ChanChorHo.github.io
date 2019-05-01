@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="计算机网络,">
+  <meta name="keywords" content="Spring,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="笔记心得记录">
-<meta name="keywords" content="计算机网络">
+<meta name="description" content="Bean的作用域     类型 说明     singleton 在SpringIOC容器中仅存在一个Bean实例，Bean以单实例的方式存在   prototype 每次调用getBean()时都会返回一个新的实例   request 每次HTTP请求都有创建一个新的Bean，该作用域仅适合于WebApplicationContext环境   session 同一个HTTP Session共享一">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指Java面试-计算机网络面试核心">
-<meta property="og:url" content="http://yoursite.com/2019/04/15/剑指Java面试-计算机网络面试核心/index.html">
+<meta property="og:title" content="Bean管理">
+<meta property="og:url" content="http://yoursite.com/2019/204/17/Bean管理/index.html">
 <meta property="og:site_name" content="Chor Ho&#39;s blog">
-<meta property="og:description" content="笔记心得记录">
+<meta property="og:description" content="Bean的作用域     类型 说明     singleton 在SpringIOC容器中仅存在一个Bean实例，Bean以单实例的方式存在   prototype 每次调用getBean()时都会返回一个新的实例   request 每次HTTP请求都有创建一个新的Bean，该作用域仅适合于WebApplicationContext环境   session 同一个HTTP Session共享一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-16T14:40:39.640Z">
+<meta property="og:image" content="http://yoursite.com/2019/204/17/Bean管理/1555500394147.png">
+<meta property="og:updated_time" content="2019-04-22T10:00:47.490Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指Java面试-计算机网络面试核心">
-<meta name="twitter:description" content="笔记心得记录">
+<meta name="twitter:title" content="Bean管理">
+<meta name="twitter:description" content="Bean的作用域     类型 说明     singleton 在SpringIOC容器中仅存在一个Bean实例，Bean以单实例的方式存在   prototype 每次调用getBean()时都会返回一个新的实例   request 每次HTTP请求都有创建一个新的Bean，该作用域仅适合于WebApplicationContext环境   session 同一个HTTP Session共享一">
+<meta name="twitter:image" content="http://yoursite.com/2019/204/17/Bean管理/1555500394147.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/15/剑指Java面试-计算机网络面试核心/">
+  <link rel="canonical" href="http://yoursite.com/2019/204/17/Bean管理/">
 
 
 
 
 
-  <title>剑指Java面试-计算机网络面试核心 | Chor Ho's blog</title>
+  <title>Bean管理 | Chor Ho's blog</title>
   
 
 
@@ -263,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/剑指Java面试-计算机网络面试核心/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/17/Bean管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chan Chor Ho">
@@ -280,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指Java面试-计算机网络面试核心</h1>
+          <h1 class="post-title" itemprop="name headline">Bean管理</h1>
         
 
         <div class="post-meta">
@@ -292,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-15T15:49:02+08:00">
-                2019-04-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T18:09:48+08:00">
+                2019-04-17
               </time>
             
 
@@ -330,7 +332,51 @@
       
 
       
-        
+        <h3>Bean的作用域<br></h3>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>singleton</td>
+<td>在SpringIOC容器中仅存在一个Bean实例，Bean以单实例的方式存在</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>每次调用getBean()时都会返回一个新的实例</td>
+</tr>
+<tr>
+<td>request</td>
+<td>每次HTTP请求都有创建一个新的Bean，该作用域仅适合于WebApplicationContext环境</td>
+</tr>
+<tr>
+<td>session</td>
+<td>同一个HTTP Session共享一个Bean，不同HTTP Session使用不同的Bean。该作用域仅适用于WebApplicationContext环境</td>
+</tr>
+</tbody>
+</table>
+<h3>使用注解定义Bean</h3>
+
+<p>@Component 描述Spring框架中的Bean</p>
+<p>除了@Component外，Spring还提供了功能基本和@Component等效的注解</p>
+<p>-@Repository 用于对DAO实现类进行标注</p>
+<p>-@Service 用于对Service实现类进行标注</p>
+<p>-@Controller 用于对Controller实现类进行标注</p>
+<p>*这三个注解是为了让标注类本身的用途清晰，Spring在后续版本会对其增强</p>
+<h3>Spring的属性注入-注解方式<br></h3>
+
+<p><img src="/2019/204/17/Bean管理/1555500394147.png" alt="1555500394147"></p>
+<h3 id="自动化装配Bean"><a href="#自动化装配Bean" class="headerlink" title="自动化装配Bean"></a>自动化装配Bean</h3><p>​    类中使用了@ComponentScan注解。这个注解能在Spring中启动组件扫描，如果没有其他配置的话，@ComponentScan默认会扫描与配置类相同的<strong>包</strong>，因此Spring会扫描这个包以及这个包下的所有子包，查找带有@Component注解的类。这样的话，就能在Spring中自动为其创建Bean。</p>
+<p>​    也可以通过XML启动组件扫描，&lt;<a href="context:component-scan" target="_blank" rel="noopener">context:component-scan</a>&gt;元素有与@Component注解相应的属性和子元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;xxx&quot;/&gt;  //xxx对应的是包的名称</span><br></pre></td></tr></table></figure>
+<h3 id="Resource注解为空指针"><a href="#Resource注解为空指针" class="headerlink" title="@Resource注解为空指针"></a>@Resource注解为空指针</h3><p>解决:因为maven配置文件的pom.xml文件中缺少javax.annotation的依赖,在pom.项目路中加入依赖即可</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.annotation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.annotation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -347,7 +393,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算机网络/" <i class="fa fa-tag"> 计算机网络</a>
+            <a href="/tags/Spring/" <i class="fa fa-tag"> Spring</a>
           
         </div>
       
@@ -360,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/14/a/" rel="next" title="a">
-                <i class="fa fa-chevron-left"></i> a
+              <a href="/2019/204/17/Mybatis常用对象SqlSessionFactory、SqlSession/" rel="next" title="Mybatis常用对象SqlSessionFactory、SqlSession">
+                <i class="fa fa-chevron-left"></i> Mybatis常用对象SqlSessionFactory、SqlSession
               </a>
             
           </div>
@@ -370,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/15/剑指Java面试-Java底层知识：JVM/" rel="prev" title="剑指Java面试-Java底层知识：JVM">
-                剑指Java面试-Java底层知识：JVM <i class="fa fa-chevron-right"></i>
+              <a href="/2019/204/18/Spring-AOP相关零散笔记/" rel="prev" title="Spring AOP相关零散笔记">
+                Spring AOP相关零散笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -424,8 +470,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -442,7 +497,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -455,7 +510,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -488,6 +543,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Bean的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">使用注解定义Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Spring的属性注入-注解方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动化装配Bean"><span class="nav-number">4.</span> <span class="nav-text">自动化装配Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource注解为空指针"><span class="nav-number">5.</span> <span class="nav-text">@Resource注解为空指针</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

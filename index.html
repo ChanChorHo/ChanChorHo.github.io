@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/Mybatis零散记录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/205/01/Java多线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chan Chor Ho">
@@ -281,7 +281,863 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/17/Mybatis零散记录/" itemprop="url">Mybatis零散记录</a></h1>
+                <a class="post-title-link" href="/2019/205/01/Java多线程/" itemprop="url">Java多线程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T13:52:49+08:00">
+                2019-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="进程、线程与任务"><a href="#进程、线程与任务" class="headerlink" title="进程、线程与任务"></a>进程、线程与任务</h2><p>进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。</p>
+<p>进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。</p>
+<p>线程是进程中可独立执行的最小单位。例如程序为了提高其文件下载效率可以使用多个线程，这些线程各自独立地从服务器上下载大文件中的一段数据。</p>
+<p>线程所要完成的计算就被称为任务，特定的线程总是在执行者特定的任务，任务代表线程要完成的工作。例如从服务器上下载一个文件、解压缩一批文件、解压缩一个文件等。</p>
+<h2 id="Java线程API简介"><a href="#Java线程API简介" class="headerlink" title="Java线程API简介"></a>Java线程API简介</h2><p>Java标准库类java.lang.Thread就是Java平台对线程的实现。Thread类或其子类的一个实例就是一个线程。</p>
+<hr>
+<h2 id="线程的两种创建方式和区别"><a href="#线程的两种创建方式和区别" class="headerlink" title="线程的两种创建方式和区别"></a>线程的两种创建方式和区别</h2><h3 id="线程的创建、启动与运行"><a href="#线程的创建、启动与运行" class="headerlink" title="线程的创建、启动与运行"></a>线程的创建、启动与运行</h3><p>每个线程都有其要执行的任务。线程的任务处理逻辑可以在Thread类的run实例方法中直接实现或通过该方法进行调用，因此<strong>run方法相当于线程的任务处理逻辑的入口方法，它由Java虚拟机在运行响应线程时直接调用，而不是由应用代码进行调用。</strong></p>
+<p>运行一个线程实际上就是让Java虚拟机执行该线程的run方法，从而使线程的任务处理逻辑得以执行。为此要启动线程，<strong>Thread类的start方法的作用是启动响应的线程。</strong>启动一个线程的实质是请求Java虚拟机运行响应的线程，而这个线程具体何时能够运行就由线程调度机决定。因此，<strong>start方法调用结束并不意味着响应的线程已经开始运行，可能稍后才被运行，也有可能永远不会被运行。</strong></p>
+<p>Thread类的两个常用构造器：Thread（）和Thread（Runnable target）。相应的，创建线程有两种方式：</p>
+<ol>
+<li>定义Thread类的子类，在该类中覆盖run方法并在该方法中实现线程任务处理逻辑</li>
+<li>创建一个java.lang.Runnable接口的实例，并在该实例中的run方法实现任务处理逻辑，然后以该Runnable接口实例作为构造器的参数直接创建（new）一个Thread类的实例</li>
+</ol>
+<p>不管以哪种方式创建线程，<strong>一旦线程的run方法执行（由Java虚拟机调用）结束，响应的线程的运行也就结束了。</strong>运行结束的线程所占用的资源（如内存空间）会如同其他Java对象一样被Java虚拟机垃圾回收。</p>
+<p>线程属于”一次性用品“，我们不能通过重新调用一个已经运行结束的线程的start方法来冲i性能运行。事实上，<strong>start方法也只能够被调用一次，多次调用同一个Thread实例中的start方法会导致抛出IllegalThreadStateException异常</strong>。</p>
+<p>在Java平台中，一个线程就是一个对象，对象的创建离不开内存空间的分配。创建一个线程与创建其他类型的Java对象不同的是，Java虚拟机会为每个线程分配<strong>调用栈</strong>（Call Stack）所需的内存空间；<strong>另外Java平台中的每个线程可能还有一个内核线程**</strong>，因此相对来说，<strong>创建线程对象比创建其他类型的对象的成本要高一些。</strong></p>
+<p>线程的run方法总是由Java虚拟机直接调用的，虽然Java语言并不阻止我们直接调用run方法，但是多数情况下我们不能这么做，因为这样做有违背创建线程的初衷（run方法运行在线程中）</p>
+<h3 id="Runnable接口"><a href="#Runnable接口" class="headerlink" title="Runnable接口"></a>Runnable接口</h3><p>Runnable接口只定义了一个方法，该方法的声明如下：</p>
+<p>public void run()</p>
+<p>Runnable接口可以被看作任务进行的抽象，任务的处理逻辑就体现在run方法中。Thread类实际上就是Runnable接口的一个实现类，其对Runnable接口的实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">        target.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因此Thread类的任务处理逻辑就是要么什么都不做（target == null），要么就直接执行target所引用的Runnable实例所实现的任务处理逻辑。</p>
+<h2 id="线程两种创建方式的区别"><a href="#线程两种创建方式的区别" class="headerlink" title="线程两种创建方式的区别"></a>线程两种创建方式的区别</h2><p> <img src="/2019/205/01/Java多线程/0aa16ecf783b4ff71b7bbe4cbab7c8d.jpg" alt="0aa16ecf783b4ff71b7bbe4cbab7c8d"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/205/01/Spring-MVC相关记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chan Chor Ho">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/A8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chor Ho's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/205/01/Spring-MVC相关记录/" itemprop="url">Spring-MVC相关记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T10:20:18+08:00">
+                2019-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是MVC设计模式？"><a href="#什么是MVC设计模式？" class="headerlink" title="什么是MVC设计模式？"></a>什么是MVC设计模式？</h2><p>–Controller：负责接收并处理请求，响应客户端。</p>
+<p>–Model：模型数据，业务逻辑。</p>
+<p>–View：呈现模型，与用户进行交互。</p>
+<p><img src="/2019/205/01/Spring-MVC相关记录/1556678431494.png" alt="1556678431494"></p>
+<h2 id="什么是SpringMVC？"><a href="#什么是SpringMVC？" class="headerlink" title="什么是SpringMVC？"></a>什么是SpringMVC？</h2><p>–Spring框架的一个后续产品，目前最好的实现MVC设计模式的框架。</p>
+<p>–Spring框架的一个子模块，二者可以很好的结合使用，不需要整合</p>
+<h2 id="SpringMVC核心组件"><a href="#SpringMVC核心组件" class="headerlink" title="SpringMVC核心组件"></a>SpringMVC核心组件</h2><ol>
+<li>DispatcherServlet：前置控制器</li>
+<li>HandlerMapping：将请求映射到Handler</li>
+<li>Handler：后端控制器，完成具体业务逻辑</li>
+<li>HandlerInterceptor：处理器拦截器</li>
+<li>HandlerExecutionChain：处理器执行链</li>
+<li>HandlerAdapter：处理器适配器</li>
+<li>ModelAndView：装配模型数据和视图信息</li>
+<li>ViewResolver：视图解析器</li>
+</ol>
+<h2 id="SpringMVC实现流程"><a href="#SpringMVC实现流程" class="headerlink" title="SpringMVC实现流程"></a>SpringMVC实现流程</h2><ol>
+<li>客户端请求被DispatcherServlet接收</li>
+<li>DispatcherServlet将请求映射到Handler</li>
+<li>生成Handler以及HandlerInterceptor</li>
+<li>返回HandlerExecutionChain（Handler+HandlerExecutionInterceptor）</li>
+<li>DispatcherServlet通过HandlerAdapter执行Handler</li>
+<li>返回一个ModelAndView</li>
+<li>DispatcherServlet通过ViewResolver进行解析</li>
+<li>返回填充了模型数据的View，响应给客户端</li>
+</ol>
+<p><img src="/2019/205/01/Spring-MVC相关记录/springmvc.png" alt="springmvc"></p>
+<h2 id="SpringMVC的使用"><a href="#SpringMVC的使用" class="headerlink" title="SpringMVC的使用"></a>SpringMVC的使用</h2><p>–大部分组件由框架提供，开发者只需通过配置进行关联。</p>
+<p>–开发者只需手动编写Handler，View</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/23/Spring事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chan Chor Ho">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/A8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chor Ho's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/204/23/Spring事务/" itemprop="url">Spring事务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-23T13:32:08+08:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h3><p><img src="/2019/204/23/Spring事务/Snipaste_2019-04-23_13-31-41.png" alt="Snipaste_2019-04-23_13-31-41"></p>
+<h3 id="Spring事务包括编程式事务和声明式事务"><a href="#Spring事务包括编程式事务和声明式事务" class="headerlink" title="Spring事务包括编程式事务和声明式事务"></a>Spring事务包括<u>编程式事务</u>和<u>声明式事务</u></h3><p><img src="/2019/204/23/Spring事务/1556000654677.png" alt="1556000654677"></p>
+<h3 id="事务管理最佳实践选择"><a href="#事务管理最佳实践选择" class="headerlink" title="事务管理最佳实践选择"></a>事务管理最佳实践选择</h3><p><img src="/2019/204/23/Spring事务/1556000757430.png" alt="1556000757430"></p>
+<h3 id="通用事务问题的解决方案"><a href="#通用事务问题的解决方案" class="headerlink" title="通用事务问题的解决方案"></a>通用事务问题的解决方案</h3><p><img src="/2019/204/23/Spring事务/1556000807710.png" alt="1556000807710"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/18/Spring-AOP相关零散笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chan Chor Ho">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/A8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chor Ho's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/204/18/Spring-AOP相关零散笔记/" itemprop="url">Spring AOP相关零散笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T12:37:06+08:00">
+                2019-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="AOP相关术语"><a href="#AOP相关术语" class="headerlink" title="AOP相关术语"></a>AOP相关术语</h3><p>例子：</p>
+<p><img src="/2019/204/18/Spring-AOP相关零散笔记/1555562802699.png" alt="1555562802699"></p>
+<h3 id="AOP的代理："><a href="#AOP的代理：" class="headerlink" title="AOP的代理："></a>AOP的代理：</h3><ul>
+<li><p>Spring在运行期间，生成动态代理对象，不需要特殊的编译器</p>
+</li>
+<li><p>Spring AOP的底层 就是通过<strong><em>JDK动态代理</em></strong>或<strong><em>CGLib动态代理技术</em></strong>为目标Bean执行横向织入</p>
+<ol>
+<li>若目标对象实现了若干接口，Spring使用JDK的java.lang.reflect.Proxy类代理。</li>
+<li>若目标对象没有实现任何借口，Spring使用CGLib库生成目标对象的子类</li>
+</ol>
+<p>*注意：</p>
+<ol>
+<li>程序中应优先对接口创建代理，便于程序解耦维护（推荐面向接口式编程）</li>
+<li>标记为final的方法，不能被代理，因为无法进行覆盖</li>
+<li>Spring只支持方法连接点，不提供属性连接点（也就是只能对方法进行增强）</li>
+</ol>
+</li>
+</ul>
+<h3 id="基于AspectJ的注解AOP开发"><a href="#基于AspectJ的注解AOP开发" class="headerlink" title="基于AspectJ的注解AOP开发"></a>基于AspectJ的注解AOP开发</h3><p>简介：</p>
+<ol>
+<li>AspectJ是一个基于Java语言的AOP框架</li>
+<li>@AspectJ通过JDK5注解技术，允许直接在Bean类中定义切面</li>
+<li>使用AspectJ需要导入Spring AOP和AspectJ相关的jar包</li>
+<li>可以通过注解方式或者XML方式开发</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/17/Bean管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chan Chor Ho">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/A8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chor Ho's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/204/17/Bean管理/" itemprop="url">Bean管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T18:09:48+08:00">
+                2019-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3>Bean的作用域<br></h3>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>singleton</td>
+<td>在SpringIOC容器中仅存在一个Bean实例，Bean以单实例的方式存在</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>每次调用getBean()时都会返回一个新的实例</td>
+</tr>
+<tr>
+<td>request</td>
+<td>每次HTTP请求都有创建一个新的Bean，该作用域仅适合于WebApplicationContext环境</td>
+</tr>
+<tr>
+<td>session</td>
+<td>同一个HTTP Session共享一个Bean，不同HTTP Session使用不同的Bean。该作用域仅适用于WebApplicationContext环境</td>
+</tr>
+</tbody>
+</table>
+<h3>使用注解定义Bean</h3>
+
+<p>@Component 描述Spring框架中的Bean</p>
+<p>除了@Component外，Spring还提供了功能基本和@Component等效的注解</p>
+<p>-@Repository 用于对DAO实现类进行标注</p>
+<p>-@Service 用于对Service实现类进行标注</p>
+<p>-@Controller 用于对Controller实现类进行标注</p>
+<p>*这三个注解是为了让标注类本身的用途清晰，Spring在后续版本会对其增强</p>
+<h3>Spring的属性注入-注解方式<br></h3>
+
+<p><img src="/2019/204/17/Bean管理/1555500394147.png" alt="1555500394147"></p>
+<h3 id="自动化装配Bean"><a href="#自动化装配Bean" class="headerlink" title="自动化装配Bean"></a>自动化装配Bean</h3><p>​    类中使用了@ComponentScan注解。这个注解能在Spring中启动组件扫描，如果没有其他配置的话，@ComponentScan默认会扫描与配置类相同的<strong>包</strong>，因此Spring会扫描这个包以及这个包下的所有子包，查找带有@Component注解的类。这样的话，就能在Spring中自动为其创建Bean。</p>
+<p>​    也可以通过XML启动组件扫描，&lt;<a href="context:component-scan" target="_blank" rel="noopener">context:component-scan</a>&gt;元素有与@Component注解相应的属性和子元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;xxx&quot;/&gt;  //xxx对应的是包的名称</span><br></pre></td></tr></table></figure>
+<h3 id="Resource注解为空指针"><a href="#Resource注解为空指针" class="headerlink" title="@Resource注解为空指针"></a>@Resource注解为空指针</h3><p>解决:因为maven配置文件的pom.xml文件中缺少javax.annotation的依赖,在pom.项目路中加入依赖即可</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.annotation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.annotation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/17/Mybatis常用对象SqlSessionFactory、SqlSession/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chan Chor Ho">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/A8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chor Ho's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/204/17/Mybatis常用对象SqlSessionFactory、SqlSession/" itemprop="url">Mybatis常用对象SqlSessionFactory、SqlSession</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T15:43:56+08:00">
+                2019-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="每个基于-MyBatis-的应用都是以一个-SqlSessionFactory的实例为核心的"><a href="#每个基于-MyBatis-的应用都是以一个-SqlSessionFactory的实例为核心的" class="headerlink" title="每个基于 MyBatis 的应用都是以一个 SqlSessionFactory的实例为核心的"></a>每个基于 MyBatis 的应用都是以一个 SqlSessionFactory的实例为核心的</h1><h3 id="从-XML-中构建-SqlSessionFactory"><a href="#从-XML-中构建-SqlSessionFactory" class="headerlink" title="从 XML 中构建 SqlSessionFactory"></a>从 XML 中构建 SqlSessionFactory</h3><p>​    SqlSessionFactory 的实例可以通过 SqlSessionFactoryBuilder获得。而SqlSessionFactoryBuilder 则可以从 XML 配置文件或一个预先定制的Configuration 的实例构建出 SqlSessionFactory 的实例。       </p>
+<p>​         从 XML 文件中构建 SqlSessionFactory的实例非常简单，建议使用类路径下的资源文件进行配置。但是也可以使用任意的输入流（InputStream）实例，包括字符串形式的文件路径或者 file:// 的 URL 形式的文件路径来配置。MyBatis 包含一个名叫 Resources的工具类，它包含一些实用方法，可使从 classpath 或其他位置加载资源文件更加容易。       </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">"org/mybatis/example/mybatis-config.xml"</span>;</span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = </span><br><span class="line">    <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br></pre></td></tr></table></figure>
+<p>​    XML 配置文件中包含了对 MyBatis系统的核心设置，包含获取数据库连接实例的数据源（DataSource）和决定事务作用域和控制方式的事务管理器（TransactionManager）。XML 配置文件的详细内容后面再探讨，这里先给出一个简单的示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta">  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">  "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"$&#123;driver&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;url&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;username&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;password&#125;"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"org/mybatis/example/BlogMapper.xml"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​    当然，还有很多可以在 XML 文件中进行配置，上面的示例指出的则是最关键的部分。要注意 XML 头部的声明，它用来验证 XML 文档正确性。environment元素体中包含了事务管理和连接池的配置。mappers 元素则是包含一组映射器（mapper），这些映射器的XML 映射文件包含了 SQL 代码和映射定义信息。</p>
+<h3 id="不使用-XML-构建-SqlSessionFactory"><a href="#不使用-XML-构建-SqlSessionFactory" class="headerlink" title="不使用 XML 构建 SqlSessionFactory"></a>不使用 XML 构建 SqlSessionFactory</h3><p>​    如果你更愿意直接从 Java 代码而不是 XML 文件中创建配置，或者想要创建你自己的配置构建器，MyBatis也提供了完整的配置类，提供所有和 XML 文件相同功能的配置项。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DataSource dataSource = BlogDataSourceFactory.getBlogDataSource();</span><br><span class="line">TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</span><br><span class="line">Environment environment = <span class="keyword">new</span> Environment(<span class="string">"development"</span>, transactionFactory, dataSource);</span><br><span class="line">Configuration configuration = <span class="keyword">new</span> Configuration(environment);</span><br><span class="line">configuration.addMapper(BlogMapper.class);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = </span><br><span class="line">    <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</span><br></pre></td></tr></table></figure>
+<p>​    注意该例中，configuration 添加了一个映射器类（mapper class）。映射器类是Java 类，它们包含 SQL 映射语句的注解从而避免依赖 XML 文件。不过，由于Java 注解的一些限制以及某些 MyBatis 映射的复杂性，要使用大多数高级映射（比如：嵌套联合映射），仍然需要使用 XML配置。有鉴于此，如果存在一个同名XML 配置文件，MyBatis 会自动查找并加载它（在这个例子中，基于类路径和 BlogMapper.class 的类名，会加载BlogMapper.xml）。具体细节稍后讨论。</p>
+<h3 id="从-SqlSessionFactory-中获取-SqlSession"><a href="#从-SqlSessionFactory-中获取-SqlSession" class="headerlink" title="从 SqlSessionFactory 中获取 SqlSession"></a>从 SqlSessionFactory 中获取 SqlSession</h3><p>​    既然有了 SqlSessionFactory，顾名思义，我们就可以从中获得 SqlSession 的实例了。SqlSession完全包含了面向数据库执行 SQL 命令所需的所有方法。你可以通过SqlSession 实例来直接执行已映射的 SQL 语句。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  Blog blog = 	  (Blog)session.selectOne(<span class="string">"org.mybatis.example.BlogMapper.selectBlog"</span>, <span class="number">101</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​         诚然，这种方式能够正常工作。不过现在有了一种更简洁的方式——使用正确描述每个语句的参数和返回值的接口（比如BlogMapper.class），你现在不仅可以执行更清晰和类型安全的代码，而且还不用担心易错的字符串字面值以及强制类型转换。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  BlogMapper mapper = session.getMapper(BlogMapper.class);</span><br><span class="line">  Blog blog = mapper.selectBlog(<span class="number">101</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们来探究一下这里到底是怎么执行的。</p>
+<h3 id="探究已映射的-SQL-语句"><a href="#探究已映射的-SQL-语句" class="headerlink" title="探究已映射的 SQL 语句"></a>探究已映射的 SQL 语句</h3><p>详细：</p>
+<p>​    <a href="http://www.mybatis.org/mybatis-3/zh/getting-started.html" target="_blank" rel="noopener">http://www.mybatis.org/mybatis-3/zh/getting-started.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/17/Mybatis零散记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chan Chor Ho">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/A8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chor Ho's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/204/17/Mybatis零散记录/" itemprop="url">Mybatis零散记录</a></h1>
         
 
         <div class="post-meta">
@@ -333,7 +1189,7 @@
       
         
           
-            <h2 id="使用resultMap解决数据库字段和实体类字段不一致的情况"><a href="#使用resultMap解决数据库字段和实体类字段不一致的情况" class="headerlink" title="使用resultMap解决数据库字段和实体类字段不一致的情况"></a>使用resultMap解决数据库字段和实体类字段不一致的情况</h2><p>​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习惯于驼峰命名法，在数据库中我们更常用下划线命名法。例如在实体类中User对象中的userName，数据库中的user_name,如果直接使用Select查询中，Mybatis就没法帮我们将我们想要的结果查询出来了。这时候可以使用resultMap来解决。<br>​    resultMap可以用来描述从数据库结果集中来加载对象，有的时候映射过于复杂，我们可以在Mapper中定义resultMap来解决映射问题。当然resultMap还有其他用法<br>​    在上面的问题中，可以在userMapper中这样定义一个resultMap：<br>​    </p>
+            <h3 id="使用resultMap解决数据库字段和实体类字段不一致的情况"><a href="#使用resultMap解决数据库字段和实体类字段不一致的情况" class="headerlink" title="使用resultMap解决数据库字段和实体类字段不一致的情况"></a>使用resultMap解决数据库字段和实体类字段不一致的情况</h3><p>​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习惯于驼峰命名法，在数据库中我们更常用下划线命名法。例如在实体类中User对象中的userName，数据库中的user_name,如果直接使用Select查询中，Mybatis就没法帮我们将我们想要的结果查询出来了。这时候可以使用resultMap来解决。<br>​    resultMap可以用来描述从数据库结果集中来加载对象，有的时候映射过于复杂，我们可以在Mapper中定义resultMap来解决映射问题。当然resultMap还有其他用法<br>​    在上面的问题中，可以在userMapper中这样定义一个resultMap：<br>​    </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userMap"</span> <span class="attr">type</span>=<span class="string">"org.sang.bean.User"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">javaType</span>=<span class="string">"long"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"user_name"</span> <span class="attr">javaType</span>=<span class="string">"string"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>关于这个resultMap：</p>
 <ol>
@@ -342,9 +1198,11 @@
 <li><p>在resultMap节点中，id表示哪个字段代表这主键，result节点定义了普通的映射关系，这里的property表示JavaBean中的属性名称，column表示数据库中的字段名称，javaType代表JavaBean中该属性的类型，jdbcType则表示数据库中该字段的类型</p>
 </li>
 </ol>
-<p>如此定义后，我们只需要在select查询的时候指定resultMap即可：</p>
-<p>​    </p>
+<p>如此定义后，我们只需要在select查询的时候指定resultMap即可：    </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getUser"</span> <span class="attr">resultMap</span>=<span class="string">"userMap"</span> <span class="attr">parameterType</span>=<span class="string">"Long"</span>&gt;</span></span><br><span class="line">        select * from user2 where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>*也可以通过id配置的方式来解决数据库主键和实体类主键不一致的情况</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">""</span> <span class="attr">property</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>同样，column表示数据库中的字段名称，property表示实体类中的属性名称</p>
 
           
         
@@ -393,7 +1251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/剑指Java面试-Java底层知识：JVM/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/15/剑指Java面试-Java底层知识：JVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chan Chor Ho">
@@ -412,7 +1270,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/15/剑指Java面试-Java底层知识：JVM/" itemprop="url">剑指Java面试-Java底层知识：JVM</a></h1>
+                <a class="post-title-link" href="/2019/204/15/剑指Java面试-Java底层知识：JVM/" itemprop="url">剑指Java面试-Java底层知识：JVM</a></h1>
         
 
         <div class="post-meta">
@@ -512,7 +1370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/剑指Java面试-计算机网络面试核心/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/15/剑指Java面试-计算机网络面试核心/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chan Chor Ho">
@@ -531,7 +1389,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/15/剑指Java面试-计算机网络面试核心/" itemprop="url">剑指Java面试-计算机网络面试核心</a></h1>
+                <a class="post-title-link" href="/2019/204/15/剑指Java面试-计算机网络面试核心/" itemprop="url">剑指Java面试-计算机网络面试核心</a></h1>
         
 
         <div class="post-meta">
@@ -631,7 +1489,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/a/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/14/a/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chan Chor Ho">
@@ -650,7 +1508,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/14/a/" itemprop="url">a</a></h1>
+                <a class="post-title-link" href="/2019/204/14/a/" itemprop="url">a</a></h1>
         
 
         <div class="post-meta">
@@ -738,136 +1596,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/13/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chan Chor Ho">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/A8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chor Ho's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/13/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-13T15:51:22+08:00">
-                2019-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -913,7 +1648,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -926,7 +1661,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
