@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Spring,">
+  <meta name="keywords" content="http,">
 
 
 
@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="什么是MVC设计模式？–Controller：负责接收并处理请求，响应客户端。 –Model：模型数据，业务逻辑。 –View：呈现模型，与用户进行交互。  什么是SpringMVC？–Spring框架的一个后续产品，目前最好的实现MVC设计模式的框架。 –Spring框架的一个子模块，二者可以很好的结合使用，不需要整合 SpringMVC核心组件 DispatcherServlet：前置控制器">
-<meta name="keywords" content="Spring">
+<meta name="description" content="WWW（万维网）构建技术分别为： 把SGML(标准通用标记语言)作为页面的文本标记语言的HTML(超文本标记语言)； 作为文档传输协议的HTTP； 指定文档所在地址的URL(统一资源定位符)  网络基础TCP/IPTCP/IP的分层管理TCP/IP协议簇按层次分别分为以下4层：应用层、传输层、网络层、数据链路层 分层的好处：  把各层的接口规划好之后，各个层次内部的设计能自由改动。 层次化之后，设">
+<meta name="keywords" content="http">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring-MVC相关记录">
-<meta property="og:url" content="http://yoursite.com/2019/205/01/Spring-MVC相关记录/index.html">
+<meta property="og:title" content="图解HTTP记录">
+<meta property="og:url" content="http://yoursite.com/2019/205/01/图解HTTP记录/index.html">
 <meta property="og:site_name" content="Chor Ho&#39;s blog">
-<meta property="og:description" content="什么是MVC设计模式？–Controller：负责接收并处理请求，响应客户端。 –Model：模型数据，业务逻辑。 –View：呈现模型，与用户进行交互。  什么是SpringMVC？–Spring框架的一个后续产品，目前最好的实现MVC设计模式的框架。 –Spring框架的一个子模块，二者可以很好的结合使用，不需要整合 SpringMVC核心组件 DispatcherServlet：前置控制器">
+<meta property="og:description" content="WWW（万维网）构建技术分别为： 把SGML(标准通用标记语言)作为页面的文本标记语言的HTML(超文本标记语言)； 作为文档传输协议的HTTP； 指定文档所在地址的URL(统一资源定位符)  网络基础TCP/IPTCP/IP的分层管理TCP/IP协议簇按层次分别分为以下4层：应用层、传输层、网络层、数据链路层 分层的好处：  把各层的接口规划好之后，各个层次内部的设计能自由改动。 层次化之后，设">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/205/01/Spring-MVC相关记录/1556678431494.png">
-<meta property="og:image" content="http://yoursite.com/2019/205/01/Spring-MVC相关记录/springmvc.png">
-<meta property="og:updated_time" content="2019-05-01T06:15:40.833Z">
+<meta property="og:image" content="http://yoursite.com/2019/205/01/图解HTTP记录/1556720546211.png">
+<meta property="og:image" content="http://yoursite.com/2019/205/01/图解HTTP记录/1556721342291.png">
+<meta property="og:updated_time" content="2019-05-01T14:37:35.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring-MVC相关记录">
-<meta name="twitter:description" content="什么是MVC设计模式？–Controller：负责接收并处理请求，响应客户端。 –Model：模型数据，业务逻辑。 –View：呈现模型，与用户进行交互。  什么是SpringMVC？–Spring框架的一个后续产品，目前最好的实现MVC设计模式的框架。 –Spring框架的一个子模块，二者可以很好的结合使用，不需要整合 SpringMVC核心组件 DispatcherServlet：前置控制器">
-<meta name="twitter:image" content="http://yoursite.com/2019/205/01/Spring-MVC相关记录/1556678431494.png">
+<meta name="twitter:title" content="图解HTTP记录">
+<meta name="twitter:description" content="WWW（万维网）构建技术分别为： 把SGML(标准通用标记语言)作为页面的文本标记语言的HTML(超文本标记语言)； 作为文档传输协议的HTTP； 指定文档所在地址的URL(统一资源定位符)  网络基础TCP/IPTCP/IP的分层管理TCP/IP协议簇按层次分别分为以下4层：应用层、传输层、网络层、数据链路层 分层的好处：  把各层的接口规划好之后，各个层次内部的设计能自由改动。 层次化之后，设">
+<meta name="twitter:image" content="http://yoursite.com/2019/205/01/图解HTTP记录/1556720546211.png">
 
 
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/205/01/Spring-MVC相关记录/">
+  <link rel="canonical" href="http://yoursite.com/2019/205/01/图解HTTP记录/">
 
 
 
 
 
-  <title>Spring-MVC相关记录 | Chor Ho's blog</title>
+  <title>图解HTTP记录 | Chor Ho's blog</title>
   
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/205/01/Spring-MVC相关记录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/205/01/图解HTTP记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chan Chor Ho">
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring-MVC相关记录</h1>
+          <h1 class="post-title" itemprop="name headline">图解HTTP记录</h1>
         
 
         <div class="post-meta">
@@ -295,7 +295,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T10:20:18+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T21:14:54+08:00">
                 2019-05-01
               </time>
             
@@ -333,35 +333,36 @@
       
 
       
-        <h2 id="什么是MVC设计模式？"><a href="#什么是MVC设计模式？" class="headerlink" title="什么是MVC设计模式？"></a>什么是MVC设计模式？</h2><p>–Controller：负责接收并处理请求，响应客户端。</p>
-<p>–Model：模型数据，业务逻辑。</p>
-<p>–View：呈现模型，与用户进行交互。</p>
-<p><img src="/2019/205/01/Spring-MVC相关记录/1556678431494.png" alt="1556678431494"></p>
-<h2 id="什么是SpringMVC？"><a href="#什么是SpringMVC？" class="headerlink" title="什么是SpringMVC？"></a>什么是SpringMVC？</h2><p>–Spring框架的一个后续产品，目前最好的实现MVC设计模式的框架。</p>
-<p>–Spring框架的一个子模块，二者可以很好的结合使用，不需要整合</p>
-<h2 id="SpringMVC核心组件"><a href="#SpringMVC核心组件" class="headerlink" title="SpringMVC核心组件"></a>SpringMVC核心组件</h2><ol>
-<li>DispatcherServlet：前置控制器</li>
-<li>HandlerMapping：将请求映射到Handler</li>
-<li>Handler：后端控制器，完成具体业务逻辑</li>
-<li>HandlerInterceptor：处理器拦截器</li>
-<li>HandlerExecutionChain：处理器执行链</li>
-<li>HandlerAdapter：处理器适配器</li>
-<li>ModelAndView：装配模型数据和视图信息</li>
-<li>ViewResolver：视图解析器</li>
+        <h2 id="WWW（万维网）构建技术分别为："><a href="#WWW（万维网）构建技术分别为：" class="headerlink" title="WWW（万维网）构建技术分别为："></a>WWW（万维网）构建技术分别为：</h2><ol>
+<li>把SGML(标准通用标记语言)作为页面的文本标记语言的HTML(超文本标记语言)；</li>
+<li>作为文档传输协议的HTTP；</li>
+<li>指定文档所在地址的URL(统一资源定位符)</li>
 </ol>
-<h2 id="SpringMVC实现流程"><a href="#SpringMVC实现流程" class="headerlink" title="SpringMVC实现流程"></a>SpringMVC实现流程</h2><ol>
-<li>客户端请求被DispatcherServlet接收</li>
-<li>DispatcherServlet将请求映射到Handler</li>
-<li>生成Handler以及HandlerInterceptor</li>
-<li>返回HandlerExecutionChain（Handler+HandlerExecutionInterceptor）</li>
-<li>DispatcherServlet通过HandlerAdapter执行Handler</li>
-<li>返回一个ModelAndView</li>
-<li>DispatcherServlet通过ViewResolver进行解析</li>
-<li>返回填充了模型数据的View，响应给客户端</li>
+<h2 id="网络基础TCP-IP"><a href="#网络基础TCP-IP" class="headerlink" title="网络基础TCP/IP"></a>网络基础TCP/IP</h2><h3 id="TCP-IP的分层管理"><a href="#TCP-IP的分层管理" class="headerlink" title="TCP/IP的分层管理"></a>TCP/IP的分层管理</h3><p>TCP/IP协议簇按层次分别分为以下4层：<u>应用层</u>、<u>传输层</u>、<u>网络层</u>、<u>数据链路层</u></p>
+<p>分层的好处：</p>
+<ol>
+<li>把各层的接口规划好之后，各个层次内部的设计能自由改动。</li>
+<li>层次化之后，设计变得相对简单了，例如处于应用层上的应用可以只考虑分派给自己的任务，而不需要考虑对方在地球上哪个地方、传输路线、是否能确保传输送达等问题。</li>
 </ol>
-<p><img src="/2019/205/01/Spring-MVC相关记录/springmvc.png" alt="springmvc"></p>
-<h2 id="SpringMVC的使用"><a href="#SpringMVC的使用" class="headerlink" title="SpringMVC的使用"></a>SpringMVC的使用</h2><p>–大部分组件由框架提供，开发者只需通过配置进行关联。</p>
-<p>–开发者只需手动编写Handler，View</p>
+<h3 id="TCP-IP协议簇各层的作用"><a href="#TCP-IP协议簇各层的作用" class="headerlink" title="TCP/IP协议簇各层的作用"></a>TCP/IP协议簇各层的作用</h3><h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p><strong>应用层决定了向用户提供应用服务时通信的活动</strong>。</p>
+<p>TCP/IP协议簇内预存了各类通用的应用服务，比如<strong>FTP</strong>（File Transfer Protocol，文件传输协议）和<strong>DNS</strong>（Domain Name System，域名系统）服务就是其中两类。</p>
+<p><strong>HTTP协议也处于该层</strong>。</p>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><p><strong>传输层对上层应用层，提供处于网络连接中的两台计算机的数据传输。</strong></p>
+<p>在传输层有两个性质不同的协议<strong>TCP</strong>（Transmission Control Protocol，传输控制协议）和<strong>UDP</strong>（User Data Protocol，用户数据报协议）。</p>
+<h4 id="网络层（又名网络互联层）"><a href="#网络层（又名网络互联层）" class="headerlink" title="网络层（又名网络互联层）"></a>网络层（又名网络互联层）</h4><p><strong>网络层用来处理网络上流动的数据包。数据包是网络传输的最小数据单位。该层规定了通过怎样的路径（所谓的传输路线）到达对方计算机，并把数据包传送给对方。</strong></p>
+<p>与对方的计算机之间通过多台计算机或网络设备进行传输时，网络层所起的作用就是在众多的选项内选择一条传输路线。</p>
+<h4 id="链路层（又名数据链路层，网络接口层）"><a href="#链路层（又名数据链路层，网络接口层）" class="headerlink" title="链路层（又名数据链路层，网络接口层）"></a>链路层（又名数据链路层，网络接口层）</h4><p><strong>用来处理连接网络的硬件部分。</strong>包括控制操作系统、硬件的设备驱动、NIC（Network Interface Card，网络适配器，即网卡），及光纤等物理可见部分。硬件上的范畴均在链路层的作用范围之内。</p>
+<h3 id="TCP-IP通信传输流"><a href="#TCP-IP通信传输流" class="headerlink" title="TCP/IP通信传输流"></a>TCP/IP通信传输流</h3><p>利用TCP/IP协议簇进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端从链路层往上走。</p>
+<p>用HTTP举例说明</p>
+<p><img src="/2019/205/01/图解HTTP记录/1556720546211.png" alt="1556720546211"></p>
+<p><strong>发送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。这种把数据信息包装起来的做法称为封装。</strong></p>
+<h2 id="与HTTP关系密切的协议：IP、TCP和DNS"><a href="#与HTTP关系密切的协议：IP、TCP和DNS" class="headerlink" title="与HTTP关系密切的协议：IP、TCP和DNS"></a>与HTTP关系密切的协议：IP、TCP和DNS</h2><h3 id="负责传输的IP协议"><a href="#负责传输的IP协议" class="headerlink" title="负责传输的IP协议"></a>负责传输的IP协议</h3><p>IP（Internet Protocol）网际协议位于网络层。几乎所有使用网络的系统都会用到这个协议。</p>
+<p>IP协议的作用是把各个数据包传送给对方。要保证确实传送到对方那里，其中两个重要的条件是<u>IP地址</u>和<u>MAC地址</u>（Media Access Control Address）</p>
+<h4 id="使用ARP协议凭借MAC地址进行通信"><a href="#使用ARP协议凭借MAC地址进行通信" class="headerlink" title="使用ARP协议凭借MAC地址进行通信"></a>使用ARP协议凭借MAC地址进行通信</h4><p>ARP是一种用以解析地址的协议，根据通信方的IP地址就能反查出对应的MAC地址。</p>
+<p>通常通信的双方是经过多台计算机和网络设备中转才连接到对方，在进行中转时，会利用下一站的MAC地址来搜索下一个中转目标，所以会采用ARP协议</p>
+<p><img src="/2019/205/01/图解HTTP记录/1556721342291.png" alt="1556721342291"></p>
+<p>没有人能够全面掌握互联网中的传输状况</p>
+<p><strong>在到达通信目标前的中转过程中，那些计算机和路由器等网络设备只能获悉很粗略的传输路线。称为路由选择。</strong></p>
 
       
     </div>
@@ -379,7 +380,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Spring/" <i class="fa fa-tag"> Spring</a>
+            <a href="/tags/http/" <i class="fa fa-tag"> http</a>
           
         </div>
       
@@ -392,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/204/23/Spring事务/" rel="next" title="Spring事务">
-                <i class="fa fa-chevron-left"></i> Spring事务
+              <a href="/2019/205/01/Java多线程/" rel="next" title="Java多线程">
+                <i class="fa fa-chevron-left"></i> Java多线程
               </a>
             
           </div>
@@ -401,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/205/01/Java多线程/" rel="prev" title="Java多线程">
-                Java多线程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -539,7 +536,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是MVC设计模式？"><span class="nav-number">1.</span> <span class="nav-text">什么是MVC设计模式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是SpringMVC？"><span class="nav-number">2.</span> <span class="nav-text">什么是SpringMVC？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringMVC核心组件"><span class="nav-number">3.</span> <span class="nav-text">SpringMVC核心组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringMVC实现流程"><span class="nav-number">4.</span> <span class="nav-text">SpringMVC实现流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringMVC的使用"><span class="nav-number">5.</span> <span class="nav-text">SpringMVC的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WWW（万维网）构建技术分别为："><span class="nav-number">1.</span> <span class="nav-text">WWW（万维网）构建技术分别为：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络基础TCP-IP"><span class="nav-number">2.</span> <span class="nav-text">网络基础TCP/IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP的分层管理"><span class="nav-number">2.1.</span> <span class="nav-text">TCP/IP的分层管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP协议簇各层的作用"><span class="nav-number">2.2.</span> <span class="nav-text">TCP/IP协议簇各层的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用层"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传输层"><span class="nav-number">2.2.2.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络层（又名网络互联层）"><span class="nav-number">2.2.3.</span> <span class="nav-text">网络层（又名网络互联层）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链路层（又名数据链路层，网络接口层）"><span class="nav-number">2.2.4.</span> <span class="nav-text">链路层（又名数据链路层，网络接口层）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP通信传输流"><span class="nav-number">2.3.</span> <span class="nav-text">TCP/IP通信传输流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与HTTP关系密切的协议：IP、TCP和DNS"><span class="nav-number">3.</span> <span class="nav-text">与HTTP关系密切的协议：IP、TCP和DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#负责传输的IP协议"><span class="nav-number">3.1.</span> <span class="nav-text">负责传输的IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用ARP协议凭借MAC地址进行通信"><span class="nav-number">3.1.1.</span> <span class="nav-text">使用ARP协议凭借MAC地址进行通信</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -262,6 +262,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/205/01/图解HTTP记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chan Chor Ho">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/A8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chor Ho's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/205/01/图解HTTP记录/" itemprop="url">图解HTTP记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T21:14:54+08:00">
+                2019-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="WWW（万维网）构建技术分别为："><a href="#WWW（万维网）构建技术分别为：" class="headerlink" title="WWW（万维网）构建技术分别为："></a>WWW（万维网）构建技术分别为：</h2><ol>
+<li>把SGML(标准通用标记语言)作为页面的文本标记语言的HTML(超文本标记语言)；</li>
+<li>作为文档传输协议的HTTP；</li>
+<li>指定文档所在地址的URL(统一资源定位符)</li>
+</ol>
+<h2 id="网络基础TCP-IP"><a href="#网络基础TCP-IP" class="headerlink" title="网络基础TCP/IP"></a>网络基础TCP/IP</h2><h3 id="TCP-IP的分层管理"><a href="#TCP-IP的分层管理" class="headerlink" title="TCP/IP的分层管理"></a>TCP/IP的分层管理</h3><p>TCP/IP协议簇按层次分别分为以下4层：<u>应用层</u>、<u>传输层</u>、<u>网络层</u>、<u>数据链路层</u></p>
+<p>分层的好处：</p>
+<ol>
+<li>把各层的接口规划好之后，各个层次内部的设计能自由改动。</li>
+<li>层次化之后，设计变得相对简单了，例如处于应用层上的应用可以只考虑分派给自己的任务，而不需要考虑对方在地球上哪个地方、传输路线、是否能确保传输送达等问题。</li>
+</ol>
+<h3 id="TCP-IP协议簇各层的作用"><a href="#TCP-IP协议簇各层的作用" class="headerlink" title="TCP/IP协议簇各层的作用"></a>TCP/IP协议簇各层的作用</h3><h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p><strong>应用层决定了向用户提供应用服务时通信的活动</strong>。</p>
+<p>TCP/IP协议簇内预存了各类通用的应用服务，比如<strong>FTP</strong>（File Transfer Protocol，文件传输协议）和<strong>DNS</strong>（Domain Name System，域名系统）服务就是其中两类。</p>
+<p><strong>HTTP协议也处于该层</strong>。</p>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><p><strong>传输层对上层应用层，提供处于网络连接中的两台计算机的数据传输。</strong></p>
+<p>在传输层有两个性质不同的协议<strong>TCP</strong>（Transmission Control Protocol，传输控制协议）和<strong>UDP</strong>（User Data Protocol，用户数据报协议）。</p>
+<h4 id="网络层（又名网络互联层）"><a href="#网络层（又名网络互联层）" class="headerlink" title="网络层（又名网络互联层）"></a>网络层（又名网络互联层）</h4><p><strong>网络层用来处理网络上流动的数据包。数据包是网络传输的最小数据单位。该层规定了通过怎样的路径（所谓的传输路线）到达对方计算机，并把数据包传送给对方。</strong></p>
+<p>与对方的计算机之间通过多台计算机或网络设备进行传输时，网络层所起的作用就是在众多的选项内选择一条传输路线。</p>
+<h4 id="链路层（又名数据链路层，网络接口层）"><a href="#链路层（又名数据链路层，网络接口层）" class="headerlink" title="链路层（又名数据链路层，网络接口层）"></a>链路层（又名数据链路层，网络接口层）</h4><p><strong>用来处理连接网络的硬件部分。</strong>包括控制操作系统、硬件的设备驱动、NIC（Network Interface Card，网络适配器，即网卡），及光纤等物理可见部分。硬件上的范畴均在链路层的作用范围之内。</p>
+<h3 id="TCP-IP通信传输流"><a href="#TCP-IP通信传输流" class="headerlink" title="TCP/IP通信传输流"></a>TCP/IP通信传输流</h3><p>利用TCP/IP协议簇进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端从链路层往上走。</p>
+<p>用HTTP举例说明</p>
+<p><img src="/2019/205/01/图解HTTP记录/1556720546211.png" alt="1556720546211"></p>
+<p><strong>发送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。这种把数据信息包装起来的做法称为封装。</strong></p>
+<h2 id="与HTTP关系密切的协议：IP、TCP和DNS"><a href="#与HTTP关系密切的协议：IP、TCP和DNS" class="headerlink" title="与HTTP关系密切的协议：IP、TCP和DNS"></a>与HTTP关系密切的协议：IP、TCP和DNS</h2><h3 id="负责传输的IP协议"><a href="#负责传输的IP协议" class="headerlink" title="负责传输的IP协议"></a>负责传输的IP协议</h3><p>IP（Internet Protocol）网际协议位于网络层。几乎所有使用网络的系统都会用到这个协议。</p>
+<p>IP协议的作用是把各个数据包传送给对方。要保证确实传送到对方那里，其中两个重要的条件是<u>IP地址</u>和<u>MAC地址</u>（Media Access Control Address）</p>
+<h4 id="使用ARP协议凭借MAC地址进行通信"><a href="#使用ARP协议凭借MAC地址进行通信" class="headerlink" title="使用ARP协议凭借MAC地址进行通信"></a>使用ARP协议凭借MAC地址进行通信</h4><p>ARP是一种用以解析地址的协议，根据通信方的IP地址就能反查出对应的MAC地址。</p>
+<p>通常通信的双方是经过多台计算机和网络设备中转才连接到对方，在进行中转时，会利用下一站的MAC地址来搜索下一个中转目标，所以会采用ARP协议</p>
+<p><img src="/2019/205/01/图解HTTP记录/1556721342291.png" alt="1556721342291"></p>
+<p>没有人能够全面掌握互联网中的传输状况</p>
+<p><strong>在到达通信目标前的中转过程中，那些计算机和路由器等网络设备只能获悉很粗略的传输路线。称为路由选择。</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/205/01/Java多线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1476,126 +1625,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/204/14/a/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chan Chor Ho">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/A8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chor Ho's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/204/14/a/" itemprop="url">a</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-14T00:57:55+08:00">
-                2019-04-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>测试发布的第一篇文章</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1648,7 +1677,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1661,7 +1690,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
