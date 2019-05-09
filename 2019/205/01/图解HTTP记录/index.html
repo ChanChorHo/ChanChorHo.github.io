@@ -89,7 +89,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/205/01/图解HTTP记录/1556720546211.png">
 <meta property="og:image" content="http://yoursite.com/2019/205/01/图解HTTP记录/1556721342291.png">
-<meta property="og:updated_time" content="2019-05-01T14:37:35.576Z">
+<meta property="og:image" content="http://yoursite.com/2019/205/01/图解HTTP记录/1556804797340.png">
+<meta property="og:updated_time" content="2019-05-02T14:13:00.954Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解HTTP记录">
 <meta name="twitter:description" content="WWW（万维网）构建技术分别为： 把SGML(标准通用标记语言)作为页面的文本标记语言的HTML(超文本标记语言)； 作为文档传输协议的HTTP； 指定文档所在地址的URL(统一资源定位符)  网络基础TCP/IPTCP/IP的分层管理TCP/IP协议簇按层次分别分为以下4层：应用层、传输层、网络层、数据链路层 分层的好处：  把各层的接口规划好之后，各个层次内部的设计能自由改动。 层次化之后，设">
@@ -363,6 +364,11 @@
 <p><img src="/2019/205/01/图解HTTP记录/1556721342291.png" alt="1556721342291"></p>
 <p>没有人能够全面掌握互联网中的传输状况</p>
 <p><strong>在到达通信目标前的中转过程中，那些计算机和路由器等网络设备只能获悉很粗略的传输路线。称为路由选择。</strong></p>
+<h3 id="确保可靠性的TCP协议"><a href="#确保可靠性的TCP协议" class="headerlink" title="确保可靠性的TCP协议"></a>确保可靠性的TCP协议</h3><p>TCP位于传输层，提供可靠的字节流服务。</p>
+<p>字节流服务：为了方便传输，将大块数据分割成报文段为单位的数据包进行管理。</p>
+<p>可靠的传输服务：能够把数据准确可靠的传输给对方。<strong>发送端首先发送一个带有SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包表示传达确认信息。最后，发送方再回传一个带ACK标志的数据包代表“握手”结束。即<u>三次握手策略</u>。</strong></p>
+<h3 id="负责域名解析的DNS服务"><a href="#负责域名解析的DNS服务" class="headerlink" title="负责域名解析的DNS服务"></a>负责域名解析的DNS服务</h3><p>DNS服务和HTTP协议一样位于<u>应用层</u>。<strong>提供<u>域名</u>到<u>IP地址</u>之间的解析服务</strong>。</p>
+<h2 id="各种协议与HTTP协议的关系"><a href="#各种协议与HTTP协议的关系" class="headerlink" title="各种协议与HTTP协议的关系"></a>各种协议与HTTP协议的关系</h2><p><img src="/2019/205/01/图解HTTP记录/1556804797340.png" alt="1556804797340"></p>
 
       
     </div>
@@ -402,6 +408,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/205/08/校园商铺平台开发/" rel="prev" title="校园商铺平台开发">
+                校园商铺平台开发 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -480,7 +490,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -536,7 +546,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WWW（万维网）构建技术分别为："><span class="nav-number">1.</span> <span class="nav-text">WWW（万维网）构建技术分别为：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络基础TCP-IP"><span class="nav-number">2.</span> <span class="nav-text">网络基础TCP/IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP的分层管理"><span class="nav-number">2.1.</span> <span class="nav-text">TCP/IP的分层管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP协议簇各层的作用"><span class="nav-number">2.2.</span> <span class="nav-text">TCP/IP协议簇各层的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用层"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传输层"><span class="nav-number">2.2.2.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络层（又名网络互联层）"><span class="nav-number">2.2.3.</span> <span class="nav-text">网络层（又名网络互联层）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链路层（又名数据链路层，网络接口层）"><span class="nav-number">2.2.4.</span> <span class="nav-text">链路层（又名数据链路层，网络接口层）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP通信传输流"><span class="nav-number">2.3.</span> <span class="nav-text">TCP/IP通信传输流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与HTTP关系密切的协议：IP、TCP和DNS"><span class="nav-number">3.</span> <span class="nav-text">与HTTP关系密切的协议：IP、TCP和DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#负责传输的IP协议"><span class="nav-number">3.1.</span> <span class="nav-text">负责传输的IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用ARP协议凭借MAC地址进行通信"><span class="nav-number">3.1.1.</span> <span class="nav-text">使用ARP协议凭借MAC地址进行通信</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WWW（万维网）构建技术分别为："><span class="nav-number">1.</span> <span class="nav-text">WWW（万维网）构建技术分别为：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络基础TCP-IP"><span class="nav-number">2.</span> <span class="nav-text">网络基础TCP/IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP的分层管理"><span class="nav-number">2.1.</span> <span class="nav-text">TCP/IP的分层管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP协议簇各层的作用"><span class="nav-number">2.2.</span> <span class="nav-text">TCP/IP协议簇各层的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用层"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传输层"><span class="nav-number">2.2.2.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络层（又名网络互联层）"><span class="nav-number">2.2.3.</span> <span class="nav-text">网络层（又名网络互联层）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链路层（又名数据链路层，网络接口层）"><span class="nav-number">2.2.4.</span> <span class="nav-text">链路层（又名数据链路层，网络接口层）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP通信传输流"><span class="nav-number">2.3.</span> <span class="nav-text">TCP/IP通信传输流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与HTTP关系密切的协议：IP、TCP和DNS"><span class="nav-number">3.</span> <span class="nav-text">与HTTP关系密切的协议：IP、TCP和DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#负责传输的IP协议"><span class="nav-number">3.1.</span> <span class="nav-text">负责传输的IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用ARP协议凭借MAC地址进行通信"><span class="nav-number">3.1.1.</span> <span class="nav-text">使用ARP协议凭借MAC地址进行通信</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确保可靠性的TCP协议"><span class="nav-number">3.2.</span> <span class="nav-text">确保可靠性的TCP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负责域名解析的DNS服务"><span class="nav-number">3.3.</span> <span class="nav-text">负责域名解析的DNS服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种协议与HTTP协议的关系"><span class="nav-number">4.</span> <span class="nav-text">各种协议与HTTP协议的关系</span></a></li></ol></div>
             
 
           </div>

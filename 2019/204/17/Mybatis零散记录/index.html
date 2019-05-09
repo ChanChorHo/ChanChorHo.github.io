@@ -330,7 +330,7 @@
       
 
       
-        <h3 id="使用resultMap解决数据库字段和实体类字段不一致的情况"><a href="#使用resultMap解决数据库字段和实体类字段不一致的情况" class="headerlink" title="使用resultMap解决数据库字段和实体类字段不一致的情况"></a>使用resultMap解决数据库字段和实体类字段不一致的情况</h3><p>​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习惯于驼峰命名法，在数据库中我们更常用下划线命名法。例如在实体类中User对象中的userName，数据库中的user_name,如果直接使用Select查询中，Mybatis就没法帮我们将我们想要的结果查询出来了。这时候可以使用resultMap来解决。<br>​    resultMap可以用来描述从数据库结果集中来加载对象，有的时候映射过于复杂，我们可以在Mapper中定义resultMap来解决映射问题。当然resultMap还有其他用法<br>​    在上面的问题中，可以在userMapper中这样定义一个resultMap：<br>​    </p>
+        <h3 id="使用resultMap解决数据库字段和实体类字段不一致的情况"><a href="#使用resultMap解决数据库字段和实体类字段不一致的情况" class="headerlink" title="使用resultMap解决数据库字段和实体类字段不一致的情况"></a>使用resultMap解决数据库字段和实体类字段不一致的情况</h3><p>​    我们直接从user表中查询一条数据出来，查询的结果是一个user对象，即mybatis会自动帮我们把查询的结果转为一个user对象，那么mybatis在转化的过程中怎么知道数据库的哪个字段对应JavaBean中的哪个属性呢？很简单，只要两者的名称一样，系统就能就能自动识别出来，那么在实际开发中，JavaBean中的属性命名我们习惯于驼峰命名法，在数据库中我们更常用下划线命名法。例如在实体类中User对象中的userName，数据库中的user_name,如果直接使用Select查询中，Mybatis就没法帮我们将我们想要的结果查询出来了。这时候可以使用resultMap来解决。</p><p>​    resultMap可以用来描述从数据库结果集中来加载对象，有的时候映射过于复杂，我们可以在Mapper中定义resultMap来解决映射问题。当然resultMap还有其他用法</p><p>​    在上面的问题中，可以在userMapper中这样定义一个resultMap：</p><p>​    </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userMap"</span> <span class="attr">type</span>=<span class="string">"org.sang.bean.User"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">javaType</span>=<span class="string">"long"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"userName"</span> <span class="attr">column</span>=<span class="string">"user_name"</span> <span class="attr">javaType</span>=<span class="string">"string"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>关于这个resultMap：</p>
 <ol>
@@ -465,7 +465,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
