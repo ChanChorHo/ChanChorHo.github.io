@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="进程、线程与任务1`&amp;amp;ensp;`进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。 线程是进程中可独立执行的最小单位。例如程序为了提">
+<meta name="description" content="走进Java世界中的线程进程、线程与任务　　进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 　　进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。 　　线程是进程中可独立执行的最小单位。例如程序为了提高其文件下载效率可以使用多个线程，这些线程各自独立地从服务器上下载大文件中的一段数据。 　　线程所要完成的计算就">
 <meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多线程">
 <meta property="og:url" content="http://yoursite.com/2019/205/01/Java多线程/index.html">
 <meta property="og:site_name" content="Chor Ho&#39;s blog">
-<meta property="og:description" content="进程、线程与任务1`&amp;amp;ensp;`进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。 线程是进程中可独立执行的最小单位。例如程序为了提">
+<meta property="og:description" content="走进Java世界中的线程进程、线程与任务　　进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 　　进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。 　　线程是进程中可独立执行的最小单位。例如程序为了提高其文件下载效率可以使用多个线程，这些线程各自独立地从服务器上下载大文件中的一段数据。 　　线程所要完成的计算就">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/205/01/Java多线程/0aa16ecf783b4ff71b7bbe4cbab7c8d.jpg">
-<meta property="og:updated_time" content="2019-05-09T07:29:17.194Z">
+<meta property="og:updated_time" content="2019-05-10T14:31:49.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程">
-<meta name="twitter:description" content="进程、线程与任务1`&amp;amp;ensp;`进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。 线程是进程中可独立执行的最小单位。例如程序为了提">
+<meta name="twitter:description" content="走进Java世界中的线程进程、线程与任务　　进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。 　　进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。 　　线程是进程中可独立执行的最小单位。例如程序为了提高其文件下载效率可以使用多个线程，这些线程各自独立地从服务器上下载大文件中的一段数据。 　　线程所要完成的计算就">
 <meta name="twitter:image" content="http://yoursite.com/2019/205/01/Java多线程/0aa16ecf783b4ff71b7bbe4cbab7c8d.jpg">
 
 
@@ -332,31 +332,50 @@
       
 
       
-        <h2 id="进程、线程与任务"><a href="#进程、线程与任务" class="headerlink" title="进程、线程与任务"></a>进程、线程与任务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`&amp;ensp;`进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。</span><br></pre></td></tr></table></figure>
-<p>进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。</p>
-<p>进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。</p>
-<p>线程是进程中可独立执行的最小单位。例如程序为了提高其文件下载效率可以使用多个线程，这些线程各自独立地从服务器上下载大文件中的一段数据。</p>
-<p>线程所要完成的计算就被称为任务，特定的线程总是在执行者特定的任务，任务代表线程要完成的工作。例如从服务器上下载一个文件、解压缩一批文件、解压缩一个文件等。</p>
-<h2 id="Java线程API简介"><a href="#Java线程API简介" class="headerlink" title="Java线程API简介"></a>Java线程API简介</h2><p>Java标准库类java.lang.Thread就是Java平台对线程的实现。Thread类或其子类的一个实例就是一个线程。</p>
+        <h1 id="走进Java世界中的线程"><a href="#走进Java世界中的线程" class="headerlink" title="走进Java世界中的线程"></a>走进Java世界中的线程</h1><h2 id="进程、线程与任务"><a href="#进程、线程与任务" class="headerlink" title="进程、线程与任务"></a>进程、线程与任务</h2><p>　　进程是程序的运行实例，例如一个运行eclipse就是一个进程；运行一个Java程序的实质是启动一个Java虚拟机的进程。</p>
+<p>　　进程是程序向操作系统申请资源（如内存空间和文件句柄）的基本单位。</p>
+<p>　　线程是进程中可独立执行的最小单位。例如程序为了提高其文件下载效率可以使用多个线程，这些线程各自独立地从服务器上下载大文件中的一段数据。</p>
+<p>　　线程所要完成的计算就被称为任务，特定的线程总是在执行者特定的任务，任务代表线程要完成的工作。例如从服务器上下载一个文件、解压缩一批文件、解压缩一个文件等。</p>
+<h2 id="Java线程API简介"><a href="#Java线程API简介" class="headerlink" title="Java线程API简介"></a>Java线程API简介</h2><p>　　Java标准库类java.lang.Thread就是Java平台对线程的实现。Thread类或其子类的一个实例就是一个线程。</p>
 <hr>
-<h2 id="线程的两种创建方式和区别"><a href="#线程的两种创建方式和区别" class="headerlink" title="线程的两种创建方式和区别"></a>线程的两种创建方式和区别</h2><h3 id="线程的创建、启动与运行"><a href="#线程的创建、启动与运行" class="headerlink" title="线程的创建、启动与运行"></a>线程的创建、启动与运行</h3><p>每个线程都有其要执行的任务。线程的任务处理逻辑可以在Thread类的run实例方法中直接实现或通过该方法进行调用，因此<strong>run方法相当于线程的任务处理逻辑的入口方法，它由Java虚拟机在运行响应线程时直接调用，而不是由应用代码进行调用。</strong></p>
-<p>运行一个线程实际上就是让Java虚拟机执行该线程的run方法，从而使线程的任务处理逻辑得以执行。为此要启动线程，<strong>Thread类的start方法的作用是启动响应的线程。</strong>启动一个线程的实质是请求Java虚拟机运行响应的线程，而这个线程具体何时能够运行就由线程调度机决定。因此，<strong>start方法调用结束并不意味着响应的线程已经开始运行，可能稍后才被运行，也有可能永远不会被运行。</strong></p>
-<p>Thread类的两个常用构造器：Thread（）和Thread（Runnable target）。相应的，创建线程有两种方式：</p>
+<h2 id="线程的两种创建方式和区别"><a href="#线程的两种创建方式和区别" class="headerlink" title="线程的两种创建方式和区别"></a>线程的两种创建方式和区别</h2><h3 id="线程的创建、启动与运行"><a href="#线程的创建、启动与运行" class="headerlink" title="线程的创建、启动与运行"></a>线程的创建、启动与运行</h3><p>　　每个线程都有其要执行的任务。线程的任务处理逻辑可以在Thread类的run实例方法中直接实现或通过该方法进行调用，因此<strong>run方法相当于线程的任务处理逻辑的入口方法，它由Java虚拟机在运行响应线程时直接调用，而不是由应用代码进行调用。</strong></p>
+<p>　　运行一个线程实际上就是让Java虚拟机执行该线程的run方法，从而使线程的任务处理逻辑得以执行。为此要启动线程，<strong>Thread类的start方法的作用是启动响应的线程。</strong>启动一个线程的实质是请求Java虚拟机运行响应的线程，而这个线程具体何时能够运行就由线程调度机决定。因此，<strong>start方法调用结束并不意味着响应的线程已经开始运行，可能稍后才被运行，也有可能永远不会被运行。</strong></p>
+<p>　　Thread类的两个常用构造器：Thread（）和Thread（Runnable target）。相应的，创建线程有两种方式：</p>
 <ol>
 <li>定义Thread类的子类，在该类中覆盖run方法并在该方法中实现线程任务处理逻辑</li>
 <li>创建一个java.lang.Runnable接口的实例，并在该实例中的run方法实现任务处理逻辑，然后以该Runnable接口实例作为构造器的参数直接创建（new）一个Thread类的实例</li>
 </ol>
-<p>不管以哪种方式创建线程，<strong>一旦线程的run方法执行（由Java虚拟机调用）结束，响应的线程的运行也就结束了。</strong>运行结束的线程所占用的资源（如内存空间）会如同其他Java对象一样被Java虚拟机垃圾回收。</p>
-<p>线程属于”一次性用品“，我们不能通过重新调用一个已经运行结束的线程的start方法来冲i性能运行。事实上，<strong>start方法也只能够被调用一次，多次调用同一个Thread实例中的start方法会导致抛出IllegalThreadStateException异常</strong>。</p>
-<p>在Java平台中，一个线程就是一个对象，对象的创建离不开内存空间的分配。创建一个线程与创建其他类型的Java对象不同的是，Java虚拟机会为每个线程分配<strong>调用栈</strong>（Call Stack）所需的内存空间；<strong>另外Java平台中的每个线程可能还有一个内核线程**</strong>，因此相对来说，<strong>创建线程对象比创建其他类型的对象的成本要高一些。</strong></p>
-<p>线程的run方法总是由Java虚拟机直接调用的，虽然Java语言并不阻止我们直接调用run方法，但是多数情况下我们不能这么做，因为这样做有违背创建线程的初衷（run方法运行在线程中）</p>
-<h3 id="Runnable接口"><a href="#Runnable接口" class="headerlink" title="Runnable接口"></a>Runnable接口</h3><p>Runnable接口只定义了一个方法，该方法的声明如下：</p>
-<p>public void run()</p>
-<p>Runnable接口可以被看作任务进行的抽象，任务的处理逻辑就体现在run方法中。Thread类实际上就是Runnable接口的一个实现类，其对Runnable接口的实现如下：</p>
+<p>　　不管以哪种方式创建线程，<strong>一旦线程的run方法执行（由Java虚拟机调用）结束，响应的线程的运行也就结束了。</strong>运行结束的线程所占用的资源（如内存空间）会如同其他Java对象一样被Java虚拟机垃圾回收。</p>
+<p>　　线程属于”一次性用品“，我们不能通过重新调用一个已经运行结束的线程的start方法来冲i性能运行。事实上，<strong>start方法也只能够被调用一次，多次调用同一个Thread实例中的start方法会导致抛出IllegalThreadStateException异常</strong>。</p>
+<p>　　在Java平台中，一个线程就是一个对象，对象的创建离不开内存空间的分配。创建一个线程与创建其他类型的Java对象不同的是，Java虚拟机会为每个线程分配<strong>调用栈</strong>（Call Stack）所需的内存空间；<strong>另外Java平台中的每个线程可能还有一个内核线程**</strong>，因此相对来说，<strong>创建线程对象比创建其他类型的对象的成本要高一些。</strong></p>
+<p>　　线程的run方法总是由Java虚拟机直接调用的，虽然Java语言并不阻止我们直接调用run方法，但是多数情况下我们不能这么做，因为这样做有违背创建线程的初衷（run方法运行在线程中）</p>
+<h3 id="Runnable接口"><a href="#Runnable接口" class="headerlink" title="Runnable接口"></a>Runnable接口</h3><p>　　Runnable接口只定义了一个方法，该方法的声明如下：</p>
+<p>　　　　public void run()</p>
+<p>　　Runnable接口可以被看作任务进行的抽象，任务的处理逻辑就体现在run方法中。Thread类实际上就是Runnable接口的一个实现类，其对Runnable接口的实现如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">        target.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因此Thread类的任务处理逻辑就是要么什么都不做（target == null），要么就直接执行target所引用的Runnable实例所实现的任务处理逻辑。</p>
+<p>　　因此Thread类的任务处理逻辑就是要么什么都不做（target == null），要么就直接执行target所引用的Runnable实例所实现的任务处理逻辑。</p>
 <h2 id="线程两种创建方式的区别"><a href="#线程两种创建方式的区别" class="headerlink" title="线程两种创建方式的区别"></a>线程两种创建方式的区别</h2><p> <img src="/2019/205/01/Java多线程/0aa16ecf783b4ff71b7bbe4cbab7c8d.jpg" alt="0aa16ecf783b4ff71b7bbe4cbab7c8d"></p>
-
+<hr>
+<h1 id="多线程的目标和挑战"><a href="#多线程的目标和挑战" class="headerlink" title="多线程的目标和挑战"></a>多线程的目标和挑战</h1><h2 id="串行、并发和并行"><a href="#串行、并发和并行" class="headerlink" title="串行、并发和并行"></a>串行、并发和并行</h2><p>　　并发是串行的反面，并发往往可以提高我们对事情的处理效率，即一段时间内可以处理或者完成更多的事情。而并行是一种更严格、理想的并发，即并行可以被看作并发的一个特例。</p>
+<p>多线程的实质就是将任务的处理方式由串行改为并发，即实现并发化，以发挥并发的优势。</p>
+<h3 id="从软件角度来说"><a href="#从软件角度来说" class="headerlink" title="从软件角度来说"></a>从软件角度来说</h3><p>　　并发就是在<strong>一段时间内以交替的方式</strong>去完成多个任务，而并行就是<strong>以齐头并进的方式</strong>去完成多个任务（需借助多个线程）。其次，<u>软件世界中的并发也未必就比串行处理效率更高或者效率提高得那么明显</u>。</p>
+<h3 id="从硬件角度来说"><a href="#从硬件角度来说" class="headerlink" title="从硬件角度来说"></a>从硬件角度来说</h3><p>　　在一个处理器一次只能够运行一个线程的情况下，由于处理器可以<strong>时间片</strong>分配的技术来实现在同一段时间内运行多个线程，因此一个处理器就可以实现<strong>并发</strong>。而<strong>并行</strong>则需要靠多个处理器在同一时刻各自运行一个线程来实现。</p>
+<h2 id="竞态"><a href="#竞态" class="headerlink" title="竞态"></a>竞态</h2><p>　　多线程编程中经常遇到一个问题就是对于同样的输入，程序的输出有时候是正确有时候是错误的，<strong>这样一种计算结果正确性与时间有关的现象就被称为竞态</strong>。</p>
+<h3 id="导致竞态常见因素"><a href="#导致竞态常见因素" class="headerlink" title="导致竞态常见因素"></a>导致竞态常见因素</h3><p>　　多个线程在没有采取任何控制措施的情况下并发地更新、读取同一个<strong>共享变量。</strong></p>
+<h3 id="定义和导致的问题"><a href="#定义和导致的问题" class="headerlink" title="定义和导致的问题"></a>定义和导致的问题</h3><p>　　计算的正确性依赖于相对时间顺序或者线程的交错。</p>
+<p>　　由定义可知，竞态不一定就导致计算结果的不正确，它只是不排除计算结果时而正确，时而错误的可能。</p>
+<p>​    竞态往往伴随着读取<strong>脏数据</strong>问题，即线程读取到一个过时的数据、<strong>丢失更新</strong>问题，即一个线程对数据所做的更新没有体现在后续其他线程对该数据的读取上。</p>
+<h3 id="竞态的模式和产生的条件"><a href="#竞态的模式和产生的条件" class="headerlink" title="竞态的模式和产生的条件"></a>竞态的模式和产生的条件</h3><p>两种模式：</p>
+<ol>
+<li>read-modify-write（读-写-改）</li>
+<li>check-then-act（检测而后行动）</li>
+</ol>
+<p>产生条件：</p>
+<p>　　被访问（读取、更新）同一组共享变量的多个线程所执行的操作相互交错。比如一个线程读取共享变量，并以该共享变量为基础及逆行计算的期间，另外一个线程更新了该共享变量的值而导致的干扰（读取脏数据）或者冲突（丢失更新）的结果。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p> 　　对于局部变量的的使用不会导致竞态。</p>
+<p>　　可以通过<strong>synchronized</strong>关键字<strong>使其修饰的方法在任一时刻只能够被一个线程执行</strong>，这使得该方法涉及的共享变量在任一时刻只能够由一个线程访问（读、写），从而避免了这个方法的交错执行而导致的干扰，这样就消除了竞态。</p>
+<hr>
+<h2 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h2>
       
     </div>
     
@@ -477,7 +496,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -490,7 +509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -533,7 +552,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程、线程与任务"><span class="nav-number">1.</span> <span class="nav-text">进程、线程与任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java线程API简介"><span class="nav-number">2.</span> <span class="nav-text">Java线程API简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的两种创建方式和区别"><span class="nav-number">3.</span> <span class="nav-text">线程的两种创建方式和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建、启动与运行"><span class="nav-number">3.1.</span> <span class="nav-text">线程的创建、启动与运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runnable接口"><span class="nav-number">3.2.</span> <span class="nav-text">Runnable接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程两种创建方式的区别"><span class="nav-number">4.</span> <span class="nav-text">线程两种创建方式的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#走进Java世界中的线程"><span class="nav-number">1.</span> <span class="nav-text">走进Java世界中的线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程、线程与任务"><span class="nav-number">1.1.</span> <span class="nav-text">进程、线程与任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java线程API简介"><span class="nav-number">1.2.</span> <span class="nav-text">Java线程API简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的两种创建方式和区别"><span class="nav-number">1.3.</span> <span class="nav-text">线程的两种创建方式和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建、启动与运行"><span class="nav-number">1.3.1.</span> <span class="nav-text">线程的创建、启动与运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runnable接口"><span class="nav-number">1.3.2.</span> <span class="nav-text">Runnable接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程两种创建方式的区别"><span class="nav-number">1.4.</span> <span class="nav-text">线程两种创建方式的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程的目标和挑战"><span class="nav-number">2.</span> <span class="nav-text">多线程的目标和挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#串行、并发和并行"><span class="nav-number">2.1.</span> <span class="nav-text">串行、并发和并行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从软件角度来说"><span class="nav-number">2.1.1.</span> <span class="nav-text">从软件角度来说</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从硬件角度来说"><span class="nav-number">2.1.2.</span> <span class="nav-text">从硬件角度来说</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#竞态"><span class="nav-number">2.2.</span> <span class="nav-text">竞态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导致竞态常见因素"><span class="nav-number">2.2.1.</span> <span class="nav-text">导致竞态常见因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义和导致的问题"><span class="nav-number">2.2.2.</span> <span class="nav-text">定义和导致的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#竞态的模式和产生的条件"><span class="nav-number">2.2.3.</span> <span class="nav-text">竞态的模式和产生的条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.2.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全性"><span class="nav-number">2.3.</span> <span class="nav-text">线程安全性</span></a></li></ol></li></ol></div>
             
 
           </div>
